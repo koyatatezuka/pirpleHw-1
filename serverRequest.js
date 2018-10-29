@@ -28,7 +28,7 @@ const serverRequest = (req, res) => {
 		payload: buffer
 	};
 
-	const chosenHandler = typeof router[trimmedPath] !== 'undefined' ? router[trimmedPath] : handler.error;
+	const chosenHandler = typeof router[trimmedPath] !== 'undefined' && req.method === 'POST' ? router[trimmedPath] : handler.error;
 
 	chosenHandler(data, (statusCode, payload) => {
 		statusCode = typeof statusCode === 'number' ? statusCode : 200;
